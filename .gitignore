@@ -1,0 +1,4 @@
+*.exe
+.vscode/
+*.bat
+guild_info.txt
