@@ -10,6 +10,7 @@ using json = nlohmann::json;
 class DiscordBot{
     std::map<std::string, std::string> params;
     json _json;
+    
 public:
     DiscordBot(std::map<std::string, std::string> params);
     DiscordGuild getDiscordGuild(uint64_t id);

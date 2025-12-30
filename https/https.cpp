@@ -7,6 +7,7 @@
 #include <boost/asio/ssl.hpp>
 
 using boost::asio::ip::tcp;
+using namespace boost;
 
 std::string jsonDecodeChunked(std::string response){
     auto pos = response.find("\r\n\r\n");
@@ -23,7 +24,7 @@ std::string jsonDecodeChunked(std::string response){
 
         std::size_t size = 0;
         try { 
-            size = std::stoul(body.substr(previous_line, size_line - previous_line), nullptr, 16);
+            size = std::stoull(body.substr(previous_line, size_line - previous_line), nullptr, 16);
         } catch(const std::exception& e){
             std::cout << "EXCEPTION: " << body.substr(previous_line, size_line);
         }
@@ -51,14 +52,14 @@ json connect(std::string url, std::map<std::string, std::string> params){
     std::string host = url.substr(0,begin);
     std::string query = url.substr(begin);
 
-    boost::asio::io_context io;
-    boost::asio::ssl::context ssl_ctx(boost::asio::ssl::context::tls_client);
+    asio::io_context io;
+    asio::ssl::context ssl_ctx(asio::ssl::context::tls_client);
 
     tcp::resolver resolver(io);
-    boost::asio::ssl::stream<tcp::socket> socket(io, ssl_ctx);
+    asio::ssl::stream<tcp::socket> socket(io, ssl_ctx);
 
     auto endpoint = resolver.resolve(host, "443");
-    boost::asio::connect(socket.next_layer(), endpoint);
+    asio::connect(socket.next_layer(), endpoint);
 
     socket.handshake(boost::asio::ssl::stream_base::client);
 

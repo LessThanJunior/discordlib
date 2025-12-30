@@ -9,12 +9,11 @@ class snowflake{
     uint8_t internalWorkerId : 5;
     uint8_t internalProcessId : 5;
     uint16_t increment : 12;
-    uint64_t id;
 public:
     snowflake(uint64_t id);
     snowflake(std::string id);
     snowflake();
-
+    uint64_t id;
     uint64_t getTimestamp() const;
     uint16_t getInternalWorkerId() const;
     uint16_t getInternalProcessId() const;

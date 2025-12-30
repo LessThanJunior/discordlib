@@ -11,25 +11,25 @@ using json = nlohmann::json;
 snowflake DiscordGuild::getId() const {return id;}
 std::string DiscordGuild::getName() const {return name;}
 snowflake DiscordGuild::getOwnerId() const {return ownerId;}
-std::optional<snowflake> DiscordGuild::getAfkChannelId() const {return afkChannelId;}
-std::optional<snowflake> DiscordGuild::getRulesChannelId() const {return rulesChannelId;}
+snowflake DiscordGuild::getAfkChannelId() const {return afkChannelId;}
+snowflake DiscordGuild::getRulesChannelId() const {return rulesChannelId;}
 uint64_t DiscordGuild::getAfkTimeout() const {return afkTimeout;}
 VerificationLevel DiscordGuild::getVerificationLevel() const {return verificationLevel;}
 std::vector<DiscordGuildRole> DiscordGuild::getRoles() const {return roles;}
 std::vector<DiscordGuildEmoji> DiscordGuild::getEmojis() const {return emojis;}
 std::vector<DiscordGuildSticker> DiscordGuild::getStickers() const {return stickers;}
 uint8_t DiscordGuild::getBoostLevel() const {return boostLevel;}
-std::optional<std::string> DiscordGuild::getVanityUrlCode() const {return vanityUrlCode;}
-std::optional<std::string> DiscordGuild::getDescription() const {return description;}
-std::optional<std::string> DiscordGuild::getBanner() const {return banner;}
+std::string DiscordGuild::getVanityUrlCode() const {return vanityUrlCode;}
+std::string DiscordGuild::getDescription() const {return description;}
+std::string DiscordGuild::getBanner() const {return banner;}
 std::string DiscordGuild::getPreferredLocale() const {return preferredLocale;};
-std::optional<std::string> DiscordGuild::getPublicUpdatesChannelId() const {return publicUpdatesChannelId;}
+std::string DiscordGuild::getPublicUpdatesChannelId() const {return publicUpdatesChannelId;}
 NsfwLevel DiscordGuild::getNsfwLevel() const {return nsfwLevel;}
 bool DiscordGuild::getPremiumProgressBarEnabled() const {return premiumProgressBarEnabled;}
-std::optional<snowflake> DiscordGuild::getSafetyAlertsChannelId() const {return safetyAlertsChannelId;}
-std::optional<std::string> DiscordGuild::getIcon() const {return icon;}
-std::optional<std::string> DiscordGuild::getIconHash() const {return iconHash;}
-std::optional<std::string> DiscordGuild::getSplash() const {return splash;}
+snowflake DiscordGuild::getSafetyAlertsChannelId() const {return safetyAlertsChannelId;}
+std::string DiscordGuild::getIcon() const {return icon;}
+std::string DiscordGuild::getIconHash() const {return iconHash;}
+std::string DiscordGuild::getSplash() const {return splash;}
 
 
 // DiscordGuildRole
@@ -39,8 +39,8 @@ std::string DiscordGuildRole::getName() const {return name;}
 uint32_t DiscordGuildRole::getColor() const {return color;}
 RoleColors DiscordGuildRole::getColors() const {return colors;}
 bool DiscordGuildRole::getHoist() const {return hoist;}
-std::optional<std::string> DiscordGuildRole::getIcon() const {return icon;}
-std::optional<std::string> DiscordGuildRole::getUnicodeEmoji() const {return unicodeEmoji;}
+std::string DiscordGuildRole::getIcon() const {return icon;}
+std::string DiscordGuildRole::getUnicodeEmoji() const {return unicodeEmoji;}
 uint32_t DiscordGuildRole::getPosition() const {return position;}
 std::string DiscordGuildRole::getPermissions() const {return permissions;}
 bool DiscordGuildRole::getManaged() const {return managed;}
