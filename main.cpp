@@ -73,7 +73,13 @@ int main(int argc, char** argv){
     std::cout << "\n\n====Channel Data====\n";
     const auto channelId = strtoull(argv[1], nullptr, 0);
     auto channel = bot.getDiscordChannel(channelId);
+    
+    if(channel->getType() == ChannelType::DM){
+        auto dmChannel = dynamic_cast<DiscordDmChannel*>(channel.get());
+        std::cout << "ID: " << dmChannel->getId() << "\n";
+    }
 
+    /*
     std::cout << "GuildId: " << channel->getGuildId() << "\n";
     std::cout << "ParentId: " << channel->getParentId() << "\n";
     std::cout << "Position: " << channel->getPosition() << "\n";
@@ -81,7 +87,8 @@ int main(int argc, char** argv){
     std::cout << "LastMessageId: " << channel->getLastMessageId() << "\n";
     std::cout << "Name: " << channel->getName() << "\n";
     std::cout << "Nsfw: " << channel->getNsfw() << "\n";
-
+    */
+   
     if(channel->getType() == ChannelType::GUILD_VOICE){
         auto voiceChannel = dynamic_cast<DiscordVoiceChannel*>(channel.get());
         std::cout << "Bitrate: " << voiceChannel->getBitrate() << "\n";

@@ -37,6 +37,12 @@ std::unique_ptr<DiscordChannel> DiscordBot::getDiscordChannel(snowflake id)
         return voiceChannel;
     }
 
+    if(type == ChannelType::DM){
+        auto dmChannel = std::make_unique<DiscordDmChannel>();
+        _json.get_to(*dmChannel);
+        return dmChannel;
+    }
+
     auto channel = std::make_unique<DiscordChannel>();
     _json.get_to(*channel);
 
