@@ -55,23 +55,48 @@ class DiscordChannel{
     std::string topic;
     bool nsfw;
     snowflake lastMessageId;
+    uint16_t timeout;                       // amount of seconds a user has to wait before sending another message
+    snowflake parentId;                     // for guild channels: id of the parent category for a channel (each parent category can contain up to 50 channels), for threads: id of the text channel this thread was created
+    uint64_t lastPinTimestamp;
+public:
+    virtual ~DiscordChannel() {}
+    snowflake getId() const;
+    ChannelType getType() const;
+    snowflake getGuildId() const;
+    uint16_t getPosition() const;
+    std::vector<PermissionOverwrite> getPermissionOverwrites() const;
+    std::string getName() const;
+    std::string getTopic() const;
+    bool getNsfw() const;
+    snowflake getLastMessageId() const;
+    uint16_t getTimeout() const;                       
+    snowflake getParentId() const;                     
+    uint64_t getLastPinTimestamp() const;
+};
+
+class DiscordVoiceChannel : public DiscordChannel{
     uint16_t bitrate;
-    uint16_t userLimit;                     // the user limit of the voice channel
-    uint16_t rateLimitPerUser;              // amount of seconds a user has to wait before sending another message
+    uint16_t userLimit;
+    std::string rtcRegion;
+public:
+    uint16_t getBitrate() const;
+    uint16_t getUserLimit() const;
+    std::string getRtcRegion() const;
+};
+
+class DiscordTextChannel : public DiscordChannel{};
+
+class DiscordDmChannel : public DiscordChannel{
     std::vector<DiscordUser> recipients;
-    std::string icon;                       // icon hash of the group DM
     snowflake ownerId;                      // id of the creator of the group DM or thread
     snowflake applicationId;                // application id of the group DM creator if it is bot-created
     bool managed;                           // for group DM channels: whether the channel is managed by an application via the gdm.join OAuth2 scope
-    snowflake parentId;                     // for guild channels: id of the parent category for a channel (each parent category can contain up to 50 channels), for threads: id of the text channel this thread was created
-    uint64_t lastPinTimestamp;
-    std::string rtcRegion;
-
+    std::string icon;                       // icon hash of the group DM
+public:
+    std::vector<DiscordUser> getRecipients() const;
+    snowflake getOwnerId() const;
+    snowflake getApplicationId() const;
+    bool getManaged() const;
+    std::string getIcon() const;
 };
-
-class DiscordVoiceChannel : DiscordChannel{};
-
-class DiscordTextChannel : DiscordChannel{};
-
-class DiscordDMChannel : DiscordChannel{};
 #endif
