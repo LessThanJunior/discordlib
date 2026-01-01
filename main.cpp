@@ -32,7 +32,7 @@ void descriptionRole(const DiscordGuildRole& role){
 }
 
 
-int main(){
+int main(int argc, char** argv){
     SetConsoleOutputCP(65001);
 
     // BOM bytes
@@ -66,11 +66,30 @@ int main(){
         std::cout << "\n";
     }
 
-    std::cout << "\n====Json Guild Data====" << "\n";
+    std::cout << "\n====Json Guild Data====\n";
     std::cout << bot.getJson().dump(4);
 
-    std::cout << "\n\n====Json Channel Data====" << "\n";
-    const auto channel = bot.getDiscordChannel(799333275503951914);
+
+    std::cout << "\n\n====Channel Data====\n";
+    const auto channelId = strtoull(argv[1], nullptr, 0);
+    auto channel = bot.getDiscordChannel(channelId);
+
+    std::cout << "GuildId: " << channel->getGuildId() << "\n";
+    std::cout << "ParentId: " << channel->getParentId() << "\n";
+    std::cout << "Position: " << channel->getPosition() << "\n";
+    std::cout << "Timeout: " << channel->getTimeout() << "\n";
+    std::cout << "LastMessageId: " << channel->getLastMessageId() << "\n";
+    std::cout << "Name: " << channel->getName() << "\n";
+    std::cout << "Nsfw: " << channel->getNsfw() << "\n";
+
+    if(channel->getType() == ChannelType::GUILD_VOICE){
+        auto voiceChannel = dynamic_cast<DiscordVoiceChannel*>(channel.get());
+        std::cout << "Bitrate: " << voiceChannel->getBitrate() << "\n";
+        std::cout << "UserLimit: " << voiceChannel->getUserLimit() << "\n";
+        std::cout << "Rtc Region: " << voiceChannel->getRtcRegion() << "\n";
+    }
+
+    std::cout << "\n\n====Json Channel Data====\n";
     std::cout << bot.getJson().dump(4);
     
 }

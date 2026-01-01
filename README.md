@@ -3,6 +3,6 @@ Write from_json for objects:
 
 - [x] DiscordGuildRole
 - [x] DiscordGuild
-- [ ] DiscordTextChannel
-- [ ] DiscordVoiceChannel
+- [x] DiscordTextChannel (full equally base DiscordChannel)
+- [x] DiscordVoiceChannel
 - [ ] DiscordDMChannel
