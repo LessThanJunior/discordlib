@@ -18,12 +18,25 @@ DiscordGuild DiscordBot::getDiscordGuild(snowflake id)
     return _json.get<DiscordGuild>();; 
 }
 
-json DiscordBot::getJson()
-{
-    return _json;
-}
-
 DiscordGuild DiscordBot::getDiscordGuild(uint64_t id)
 {
     return getDiscordGuild(snowflake(id));
+}
+
+DiscordChannel DiscordBot::getDiscordChannel(snowflake id) 
+{
+    std::string test = "discord.com/api/v10/channels/" + std::to_string((uint64_t)id);
+    json j = connect(test, this->params);
+    _json = std::move(j);
+    return DiscordChannel();
+}
+
+DiscordChannel DiscordBot::getDiscordChannel(uint64_t id) 
+{
+    return getDiscordChannel(snowflake(id));
+}
+
+json DiscordBot::getJson()
+{
+    return _json;
 }
