@@ -66,7 +66,11 @@ int main(){
         std::cout << "\n";
     }
 
-    std::cout << "\n====Json Data====" << "\n";
+    std::cout << "\n====Json Guild Data====" << "\n";
+    std::cout << bot.getJson().dump(4);
+
+    std::cout << "\n\n====Json Channel Data====" << "\n";
+    const auto channel = bot.getDiscordChannel(799333275503951914);
     std::cout << bot.getJson().dump(4);
     
 }

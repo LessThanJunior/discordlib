@@ -4,6 +4,7 @@
 #include <string>
 #include "guild/guild.h"
 #include <nlohmann/json.hpp>
+#include "guild/channel/channel.h"
 
 using json = nlohmann::json;
 
@@ -15,6 +16,9 @@ public:
     DiscordBot(std::map<std::string, std::string> params);
     DiscordGuild getDiscordGuild(uint64_t id);
     DiscordGuild getDiscordGuild(snowflake id);
+
+    DiscordChannel getDiscordChannel(uint64_t id);
+    DiscordChannel getDiscordChannel(snowflake id);
     json getJson();
 };
 #endif
