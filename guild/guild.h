@@ -54,7 +54,6 @@ class DiscordGuild{
     snowflake safetyAlertsChannelId;
     uint8_t boostLevel;
 public:
-    //friend class DiscordBot;
     friend class GuildJsonDeserializer;
     snowflake getId() const;
     std::string getName() const;
@@ -94,7 +93,6 @@ class DiscordGuildRole{
     bool mentionable;
     uint32_t flags;
 public:
-    //friend class DiscordBot;
     friend class GuildJsonDeserializer;
     snowflake getId() const;
     std::string getName() const;
@@ -113,7 +111,7 @@ public:
 class DiscordGuildSticker{
     snowflake id;
 public:
-    friend class DiscordBot;
+    friend class GuildJsonDeserializer;
 };
 
 class DiscordGuildEmoji{
@@ -127,7 +125,7 @@ class DiscordGuildEmoji{
     bool available;
     snowflake guild_id;
 public:
-    //friend class DiscordBot;
+    friend class GuildJsonDeserializer;
 };
 
 std::string descriptionVerificationLevel(const VerificationLevel& verification);
