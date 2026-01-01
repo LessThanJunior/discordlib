@@ -7,16 +7,10 @@ Usage Libraries:
 
 <br>
 
-# Todo List
+# Branches
 
-Structures (C++ classes): <br><br>
-- [ ] Write full discord guild structure
-- [ ] Write full discord guild member structure
-- [ ] Write full discord guild role structure
-- [ ] Write full discord guild message structure
+[json_deserializer](https://github.com/LessThanJunior/discordlib/tree/json_deserializer) - From JSON to objects
 
-<br>
-Logic: <br><br>
+[discord_channel](https://github.com/LessThanJunior/discordlib/tree/discord_channel) - Implements DiscordChannel object
 
-- [ ] Async WebSocket
-- [ ] Create JSON from object
+[main](https://github.com/LessThanJunior/discordlib/tree/main) - Current stable version
