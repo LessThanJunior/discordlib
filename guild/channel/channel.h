@@ -102,4 +102,6 @@ public:
     bool getManaged() const;
     std::string getIcon() const;
 };
+
+bool isGuild(ChannelType type);
 #endif
