@@ -34,6 +34,8 @@ void descriptionRole(const DiscordGuildRole& role){
 
 int main(){
     SetConsoleOutputCP(65001);
+
+    // BOM bytes
     std::cout << "\xEF\xBB\xBF";
 
     DiscordBot bot(http_params);
