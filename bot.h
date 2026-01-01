@@ -17,8 +17,8 @@ public:
     DiscordGuild getDiscordGuild(uint64_t id);
     DiscordGuild getDiscordGuild(snowflake id);
 
-    DiscordChannel getDiscordChannel(uint64_t id);
-    DiscordChannel getDiscordChannel(snowflake id);
+    std::unique_ptr<DiscordChannel> getDiscordChannel(uint64_t id);
+    std::unique_ptr<DiscordChannel> getDiscordChannel(snowflake id);
     json getJson();
 };
 #endif

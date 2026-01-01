@@ -15,7 +15,7 @@ snowflake DiscordChannel::getParentId() const { return parentId; }
 uint64_t DiscordChannel::getLastPinTimestamp() const { return lastPinTimestamp; }
 
 // DiscordVoiceChannel
-uint16_t DiscordVoiceChannel::getBitrate() const { return bitrate; }
+uint32_t DiscordVoiceChannel::getBitrate() const { return bitrate; }
 uint16_t DiscordVoiceChannel::getUserLimit() const { return userLimit; }
 std::string DiscordVoiceChannel::getRtcRegion() const { return rtcRegion; }
 

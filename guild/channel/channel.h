@@ -60,6 +60,7 @@ class DiscordChannel{
     uint64_t lastPinTimestamp;
 public:
     virtual ~DiscordChannel() {}
+    friend class ChannelJsonDeserializer;
     snowflake getId() const;
     ChannelType getType() const;
     snowflake getGuildId() const;
@@ -75,11 +76,12 @@ public:
 };
 
 class DiscordVoiceChannel : public DiscordChannel{
-    uint16_t bitrate;
+    uint32_t bitrate;
     uint16_t userLimit;
     std::string rtcRegion;
 public:
-    uint16_t getBitrate() const;
+    friend class ChannelJsonDeserializer;
+    uint32_t getBitrate() const;
     uint16_t getUserLimit() const;
     std::string getRtcRegion() const;
 };
@@ -93,6 +95,7 @@ class DiscordDmChannel : public DiscordChannel{
     bool managed;                           // for group DM channels: whether the channel is managed by an application via the gdm.join OAuth2 scope
     std::string icon;                       // icon hash of the group DM
 public:
+    friend class ChannelJsonDeserializer;
     std::vector<DiscordUser> getRecipients() const;
     snowflake getOwnerId() const;
     snowflake getApplicationId() const;
