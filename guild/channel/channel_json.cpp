@@ -5,17 +5,6 @@ bool hasValue(const json &j, std::string key){
     return j.contains(key) && !j.at(key).is_null();
 }
 
-bool isGuild(ChannelType type){
-    return type == ChannelType::GUILD_TEXT ||
-        type == ChannelType::GUILD_VOICE ||
-        type == ChannelType::GUILD_ANNOUNCEMENT ||
-        type == ChannelType::GUILD_CATEGORY ||
-        type == ChannelType::GUILD_DIRECTORY ||
-        type == ChannelType::GUILD_FORUM || 
-        type == ChannelType::GUILD_MEDIA ||
-        type == ChannelType::GUILD_STAGE_VOICE;
-}
-
 void ChannelJsonDeserializer::toDiscordVoiceChannel(const json &j, DiscordVoiceChannel &channel){
 
     channel.bitrate = j.at("bitrate").get<uint32_t>();

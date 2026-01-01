@@ -79,16 +79,17 @@ int main(int argc, char** argv){
         std::cout << "ID: " << dmChannel->getId() << "\n";
     }
 
-    /*
-    std::cout << "GuildId: " << channel->getGuildId() << "\n";
-    std::cout << "ParentId: " << channel->getParentId() << "\n";
-    std::cout << "Position: " << channel->getPosition() << "\n";
-    std::cout << "Timeout: " << channel->getTimeout() << "\n";
-    std::cout << "LastMessageId: " << channel->getLastMessageId() << "\n";
-    std::cout << "Name: " << channel->getName() << "\n";
-    std::cout << "Nsfw: " << channel->getNsfw() << "\n";
-    */
-   
+    if(isGuild(channel->getType())){
+        std::cout << "GuildId: " << channel->getGuildId() << "\n";
+        std::cout << "ParentId: " << channel->getParentId() << "\n";
+        std::cout << "Position: " << channel->getPosition() << "\n";
+        std::cout << "Timeout: " << channel->getTimeout() << "\n";
+        std::cout << "LastMessageId: " << channel->getLastMessageId() << "\n";
+        std::cout << "Name: " << channel->getName() << "\n";
+        std::cout << "Nsfw: " << channel->getNsfw() << "\n";
+    }
+    
+
     if(channel->getType() == ChannelType::GUILD_VOICE){
         auto voiceChannel = dynamic_cast<DiscordVoiceChannel*>(channel.get());
         std::cout << "Bitrate: " << voiceChannel->getBitrate() << "\n";
