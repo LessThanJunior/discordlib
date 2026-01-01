@@ -1,4 +1,7 @@
 #include "snowflake.h"
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 snowflake::snowflake(uint64_t id)
 {
@@ -26,6 +29,7 @@ snowflake::snowflake()
     internalProcessId = 0;
     increment = 0;
 }
+
 
 snowflake getValue(const std::optional<snowflake>& id) { return id.has_value() ? id.value() : snowflake();}
 

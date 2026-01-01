@@ -21,24 +21,29 @@ std::string getValue(const std::optional<std::string>& value){
     return value.has_value() ? value.value() : "";
 }
 
+
 void descriptionRole(const DiscordGuildRole& role){
     std::cout << "Role ID: " << role.getId() << "\n"
               << "Role Name: " << role.getName() << "\n"
               << "Role Permissions: " << role.getPermissions() << "\n"
               << "Role Mentionable: " << role.getMentionable() << "\n"
               << "Role Color: " << role.getColor() << "\n"
-              << "Role Icon: " << getValue(role.getIcon()) << "\n";
+              << "Role Icon: " << role.getIcon() << "\n";
 }
+
 
 int main(){
     SetConsoleOutputCP(65001);
+
+    // BOM bytes
     std::cout << "\xEF\xBB\xBF";
 
     DiscordBot bot(http_params);
     const auto guild = bot.getDiscordGuild(799333274861174876);
-    const auto afk_channel_id = getValue(guild.getAfkChannelId());
-    const auto guild_id = getValue(guild.getId());
-    const auto rules_channel_id = getValue(guild.getRulesChannelId());
+    
+    const auto afk_channel_id = guild.getAfkChannelId();
+    const auto guild_id = guild.getId();
+    const auto rules_channel_id = guild.getRulesChannelId();
 
     std::cout << "Afk Timeout: " << guild.getAfkTimeout() << "\n";
     std::cout << "Afk ChannelId: " << afk_channel_id << "\n";
@@ -47,11 +52,12 @@ int main(){
     std::cout << "Guild name " << guild.getName() << "\n";
     std::cout << "Rules channel id: " << rules_channel_id << "\n";
     std::cout << "Verification level: " << descriptionVerificationLevel(guild.getVerificationLevel()) << "\n";
-    std::cout << "Banner: " << getValue(guild.getBanner()) << "\n";
+    std::cout << "Banner: " << guild.getBanner() << "\n";
     std::cout << "Preferred locale: " << guild.getPreferredLocale() << "\n";
-    std::cout << "Description: " << getValue(guild.getDescription()) << "\n";
-    std::cout << "Guild icon: " << getValue(guild.getIcon()) << "\n";
-    std::cout << "Guild icon hash" << getValue(guild.getIconHash());
+    std::cout << "Description: " << guild.getDescription() << "\n";
+    std::cout << "Guild icon: " << guild.getIcon() << "\n";
+    std::cout << "Guild icon hash: " << guild.getIconHash() << "\n";
+    std::cout << "Safety Alerts Channel: " << guild.getSafetyAlertsChannelId() << "\n";
 
     std::cout << "\n\n=====Description Role======\n";
     const auto roles = guild.getRoles();
@@ -60,6 +66,11 @@ int main(){
         std::cout << "\n";
     }
 
-    std::cout << "\n====Json Data====" << "\n";
+    std::cout << "\n====Json Guild Data====" << "\n";
     std::cout << bot.getJson().dump(4);
+
+    std::cout << "\n\n====Json Channel Data====" << "\n";
+    const auto channel = bot.getDiscordChannel(799333275503951914);
+    std::cout << bot.getJson().dump(4);
+    
 }

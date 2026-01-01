@@ -33,49 +33,49 @@ struct RoleColors{
 class DiscordGuild{
     snowflake id;
     std::string name;
-    std::optional<std::string> icon;
-    std::optional<std::string> iconHash;
-    std::optional<std::string> splash;
+    std::string icon;
+    std::string iconHash;
+    std::string splash;
     snowflake ownerId;
-    std::optional<snowflake> afkChannelId;
-    std::optional<snowflake> rulesChannelId;
+    snowflake afkChannelId;
+    snowflake rulesChannelId;
     uint64_t afkTimeout;
     VerificationLevel verificationLevel;
     std::vector<DiscordGuildRole> roles;
     std::vector<DiscordGuildEmoji> emojis;
     std::vector<DiscordGuildSticker> stickers;
-    std::optional<std::string> vanityUrlCode;
-    std::optional<std::string> description;
-    std::optional<std::string> banner;
+    std::string vanityUrlCode;
+    std::string description;
+    std::string banner;
     std::string preferredLocale;
-    std::optional<std::string> publicUpdatesChannelId;
+    std::string publicUpdatesChannelId;
     NsfwLevel nsfwLevel;
     bool premiumProgressBarEnabled;
-    std::optional<snowflake> safetyAlertsChannelId;
+    snowflake safetyAlertsChannelId;
     uint8_t boostLevel;
 public:
-    friend class DiscordBot;
+    friend class GuildJsonDeserializer;
     snowflake getId() const;
     std::string getName() const;
     snowflake getOwnerId() const;
-    std::optional<snowflake> getAfkChannelId() const;
-    std::optional<snowflake> getRulesChannelId() const;
+    snowflake getAfkChannelId() const;
+    snowflake getRulesChannelId() const;
     uint64_t getAfkTimeout() const;
     VerificationLevel getVerificationLevel() const;
     std::vector<DiscordGuildRole> getRoles() const;
     std::vector<DiscordGuildEmoji> getEmojis() const;
     std::vector<DiscordGuildSticker> getStickers() const;
-    std::optional<std::string> getVanityUrlCode() const;
-    std::optional<std::string> getDescription() const;
-    std::optional<std::string> getBanner() const;
+    std::string getVanityUrlCode() const;
+    std::string getDescription() const;
+    std::string getBanner() const;
     std::string getPreferredLocale() const;
-    std::optional<std::string> getPublicUpdatesChannelId() const;
+    std::string getPublicUpdatesChannelId() const;
     NsfwLevel getNsfwLevel() const;
     bool getPremiumProgressBarEnabled() const;
-    std::optional<snowflake> getSafetyAlertsChannelId() const;
-    std::optional<std::string> getIcon() const;
-    std::optional<std::string> getIconHash() const;
-    std::optional<std::string> getSplash() const;
+    snowflake getSafetyAlertsChannelId() const;
+    std::string getIcon() const;
+    std::string getIconHash() const;
+    std::string getSplash() const;
     uint8_t getBoostLevel() const;
 };
 
@@ -85,22 +85,22 @@ class DiscordGuildRole{
     uint32_t color;
     RoleColors colors;
     bool hoist;
-    std::optional<std::string> icon;
-    std::optional<std::string> unicodeEmoji;
+    std::string icon;
+    std::string unicodeEmoji;
     uint32_t position;
     std::string permissions;
     bool managed;
     bool mentionable;
     uint32_t flags;
 public:
-    friend class DiscordBot;
+    friend class GuildJsonDeserializer;
     snowflake getId() const;
     std::string getName() const;
     uint32_t getColor() const;
     RoleColors getColors() const;
     bool getHoist() const;
-    std::optional<std::string> getIcon() const;
-    std::optional<std::string> getUnicodeEmoji() const;
+    std::string getIcon() const;
+    std::string getUnicodeEmoji() const;
     uint32_t getPosition() const;
     std::string getPermissions() const;
     bool getManaged() const;
@@ -111,12 +111,12 @@ public:
 class DiscordGuildSticker{
     snowflake id;
 public:
-    friend class DiscordBot;
+    friend class GuildJsonDeserializer;
 };
 
 class DiscordGuildEmoji{
     snowflake id;
-    std::optional<snowflake> packId;
+    snowflake packId;
     std::string name;
     std::string description;
     std::string tags;
@@ -125,7 +125,7 @@ class DiscordGuildEmoji{
     bool available;
     snowflake guild_id;
 public:
-    friend class DiscordBot;
+    friend class GuildJsonDeserializer;
 };
 
 std::string descriptionVerificationLevel(const VerificationLevel& verification);

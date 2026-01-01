@@ -7,6 +7,7 @@
 #include <boost/asio/ssl.hpp>
 
 using boost::asio::ip::tcp;
+using namespace boost;
 
 std::string jsonDecodeChunked(std::string response){
     auto pos = response.find("\r\n\r\n");
@@ -23,7 +24,7 @@ std::string jsonDecodeChunked(std::string response){
 
         std::size_t size = 0;
         try { 
-            size = std::stoul(body.substr(previous_line, size_line - previous_line), nullptr, 16);
+            size = std::stoull(body.substr(previous_line, size_line - previous_line), nullptr, 16);
         } catch(const std::exception& e){
             std::cout << "EXCEPTION: " << body.substr(previous_line, size_line);
         }
@@ -31,12 +32,11 @@ std::string jsonDecodeChunked(std::string response){
         if(size == 0){
             break;
         }
-        //std::cout << size << "\n";
 
         // JSON
         std::string temp = body.substr(size_line+2, size);
         json_string.append(std::move(temp));
-        //std::cout << temp;
+
         previous_line = size_line + 2 + size + 2;
         if(previous_line > body.length()){
             break;
@@ -51,15 +51,18 @@ json connect(std::string url, std::map<std::string, std::string> params){
     std::string host = url.substr(0,begin);
     std::string query = url.substr(begin);
 
-    boost::asio::io_context io;
-    boost::asio::ssl::context ssl_ctx(boost::asio::ssl::context::tls_client);
+    asio::io_context io;
+    asio::ssl::context ssl_ctx(asio::ssl::context::tls_client);
 
     tcp::resolver resolver(io);
-    boost::asio::ssl::stream<tcp::socket> socket(io, ssl_ctx);
+    asio::ssl::stream<tcp::socket> socket(io, ssl_ctx);
 
     auto endpoint = resolver.resolve(host, "443");
-    boost::asio::connect(socket.next_layer(), endpoint);
 
+    // TCP connection
+    asio::connect(socket.next_layer(), endpoint);
+
+    // TCP handshake
     socket.handshake(boost::asio::ssl::stream_base::client);
 
     std::string request;
@@ -70,8 +73,7 @@ json connect(std::string url, std::map<std::string, std::string> params){
     request.append("Accept: application/json\r\n");
     request.append("Connection: close\r\n\r\n");
 
-    //std::cout << request;
-
+    // TLS over HTTP
     boost::asio::write(socket, boost::asio::buffer(request));
 
     boost::asio::streambuf response;
@@ -88,15 +90,3 @@ json connect(std::string url, std::map<std::string, std::string> params){
     std::string json = jsonDecodeChunked(response_string);
     return json::parse(json);
 }
-
-/*
-    std::string chunked_test =
-    "\r\n\r\n"
-    "5\r\n"
-    "Hello\r\n"
-    "6\r\n"
-    " World\r\n"
-    "0\r\n"
-    "\r\n";
-    std::cout << jsonDecodeChunked(chunked_test);
-*/
