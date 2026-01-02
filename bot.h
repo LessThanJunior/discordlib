@@ -19,6 +19,10 @@ public:
 
     std::unique_ptr<DiscordChannel> getDiscordChannel(uint64_t id);
     std::unique_ptr<DiscordChannel> getDiscordChannel(snowflake id);
+
+    DiscordUser me();
+    DiscordUser getDiscordUser(snowflake id);
+    DiscordUser getDiscordUser(uint64_t id);
     json getJson();
 };
 #endif
