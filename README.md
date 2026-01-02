@@ -1,8 +1,29 @@
-# Todo List
-Write from_json for objects:
+# Discord API C++ Library
 
-- [x] DiscordGuildRole
-- [x] DiscordGuild
-- [x] DiscordTextChannel (full equally base DiscordChannel)
-- [x] DiscordVoiceChannel
-- [ ] DiscordDMChannel
+## Dependencies:
+
+- **Boost.Asio** - Uses with openssl
+- **nlohmann/json**
+
+## Implemented Features
+
+- HTTPS GET requests
+- Retrieve a Guild by id
+- Retrieve a Channel by id
+- Retrieve the current bot user
+- Retrieve a User by id
+- Retrieve Roles from a Guild
+
+## Planned Features
+
+- [ ] Get all Guilds
+- [ ] Get all Channels
+- [ ] Get Guild Members
+- [ ] Get Guild Member by id
+- [ ] Modify objects
+  - [ ] Guild
+  - [ ] Channel
+  - [ ] GuildMember
+  - [ ] GuildRole
+
+
