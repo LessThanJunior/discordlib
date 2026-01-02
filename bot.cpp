@@ -5,6 +5,7 @@
 #include "snowflake.h"
 #include "guild/guild_json.h"
 #include "guild/channel/channel_json.h"
+#include "user/user_json.h"
 
 DiscordBot::DiscordBot(std::map<std::string, std::string> params)
 {
@@ -52,6 +53,24 @@ std::unique_ptr<DiscordChannel> DiscordBot::getDiscordChannel(snowflake id)
 std::unique_ptr<DiscordChannel> DiscordBot::getDiscordChannel(uint64_t id) 
 {
     return getDiscordChannel(snowflake(id));
+}
+
+DiscordUser DiscordBot::me(){
+    json j = connect("discord.com/api/v10/users/@me", params);
+    _json = std::move(j);
+
+    return _json.get<DiscordUser>();
+}
+
+DiscordUser DiscordBot::getDiscordUser(snowflake id){
+    json j = connect("discord.com/api/v10/users/" + std::to_string(id), params);
+    _json = std::move(j);
+
+    return _json.get<DiscordUser>();
+}
+
+DiscordUser DiscordBot::getDiscordUser(uint64_t id){
+    return getDiscordUser(snowflake(id));
 }
 
 json DiscordBot::getJson()

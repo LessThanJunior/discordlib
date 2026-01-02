@@ -1,9 +1,7 @@
 #include "channel_json.h"
 #include <iostream>
-
-bool hasValue(const json &j, std::string key){
-    return j.contains(key) && !j.at(key).is_null();
-}
+#include "../../utils/utils.h"
+#include "../../user/user_json.h"
 
 void ChannelJsonDeserializer::toDiscordVoiceChannel(const json &j, DiscordVoiceChannel &channel){
 
@@ -52,6 +50,11 @@ void ChannelJsonDeserializer::toDiscordDmChannel(const json &j, DiscordDmChannel
     
     if(hasValue(j, "icon"))
         channel.icon = j.at("icon").get<std::string>();
+
+    if(j.contains("recipients") && j.at("recipients").is_array())
+        for(const auto& recipient : j.at("recipients")){
+            channel.recipients.push_back(recipient.get<DiscordUser>());
+        }
 }
 
 void from_json(const json &j, DiscordChannel &channel){

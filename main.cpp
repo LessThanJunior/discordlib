@@ -39,6 +39,20 @@ int main(int argc, char** argv){
     std::cout << "\xEF\xBB\xBF";
 
     DiscordBot bot(http_params);
+    std::cout << "====User Info====\n";
+
+    const auto user = bot.getDiscordUser(370911037441966080);
+    std::cout << "User ID: " << user.getId() << "\n";
+    std::cout << "Username: " << user.getUsername() << "\n";
+    std::cout << "Is bot: " << user.getBot() << "\n";
+    std::cout << "User email: " << user.getEmail() << "\n";
+    std::cout << "Verified: " << user.getVerified() << "\n";
+
+    std::cout << "\n\n====Json User Data====\n";
+    std::cout << bot.getJson().dump(4);
+
+    std::cout << "\n\n====Guild Info====\n";
+
     const auto guild = bot.getDiscordGuild(799333274861174876);
     
     const auto afk_channel_id = guild.getAfkChannelId();
@@ -76,7 +90,7 @@ int main(int argc, char** argv){
     
     if(channel->getType() == ChannelType::DM){
         auto dmChannel = dynamic_cast<DiscordDmChannel*>(channel.get());
-        std::cout << "ID: " << dmChannel->getId() << "\n";
+        std::cout << "Channel ID: " << dmChannel->getId() << "\n";
     }
 
     if(isGuild(channel->getType())){

@@ -1,16 +1,29 @@
-Own DiscordAPI client library from a beginner 
+# Discord API C++ Library
 
-Usage Libraries:
+## Dependencies:
 
-- [Boost.Asio](https://www.boost.org/doc/libs/latest/doc/html/boost_asio/using.html) - Uses with openssl
-- [nlohmann/json](https://github.com/nlohmann/json/releases/tag/v3.12.0)
+- **Boost.Asio** - Uses with openssl
+- **nlohmann/json**
 
-<br>
+## Implemented Features
 
-# Branches
+- HTTPS GET requests
+- Retrieve a Guild by id
+- Retrieve a Channel by id
+- Retrieve the current bot user
+- Retrieve a User by id
+- Retrieve Roles from a Guild
 
-[json_deserializer](https://github.com/LessThanJunior/discordlib/tree/json_deserializer) - From JSON to objects
+## Planned Features
 
-[discord_channel](https://github.com/LessThanJunior/discordlib/tree/discord_channel) - Implements DiscordChannel object
+- [ ] Get all Guilds
+- [ ] Get all Channels
+- [ ] Get Guild Members
+- [ ] Get Guild Member by id
+- [ ] Modify objects
+  - [ ] Guild
+  - [ ] Channel
+  - [ ] GuildMember
+  - [ ] GuildRole
 
-[main](https://github.com/LessThanJunior/discordlib/tree/main) - Current stable version
+
