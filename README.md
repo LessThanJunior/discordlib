@@ -16,10 +16,11 @@
 
 ## Planned Features
 
-- [ ] Get all Guilds
-- [ ] Get all Channels
+- [x] Get all Guilds
+- [x] Get all Channels
 - [ ] Get Guild Members
 - [ ] Get Guild Member by id
+- [ ] Add HTTPS rate limiting if needed 
 - [ ] Modify objects
   - [ ] Guild
   - [ ] Channel

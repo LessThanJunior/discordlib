@@ -65,7 +65,7 @@ void GuildJsonDeserializer::toDiscordGuild(const json &j, DiscordGuild &guild)
     }
 
     
-    if(!j.at("roles").is_null() && j.at("roles").is_array()){
+    if(j.contains("roles") && j.at("roles").is_array()){
         for(const auto& r : j.at("roles")){
             guild.roles.push_back(r.get<DiscordGuildRole>());
         }

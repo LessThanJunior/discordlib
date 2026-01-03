@@ -21,6 +21,8 @@ public:
     std::unique_ptr<DiscordChannel> getDiscordChannel(snowflake id);
 
     DiscordUser me();
+    std::vector<DiscordGuild> getDiscordGuilds();
+    std::vector<std::unique_ptr<DiscordChannel>> getDiscordChannels(uint64_t guildId);
     DiscordUser getDiscordUser(snowflake id);
     DiscordUser getDiscordUser(uint64_t id);
     json getJson();

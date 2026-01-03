@@ -31,6 +31,30 @@ void descriptionRole(const DiscordGuildRole& role){
               << "Role Icon: " << role.getIcon() << "\n";
 }
 
+void descriptionChannel(const std::unique_ptr<DiscordChannel>& channel){
+    if(channel->getType() == ChannelType::DM){
+        auto dmChannel = dynamic_cast<DiscordDmChannel*>(channel.get());
+        std::cout << "Channel ID: " << dmChannel->getId() << "\n";
+    }
+
+    if(isGuild(channel->getType())){
+        std::cout << "GuildId: " << channel->getGuildId() << "\n";
+        std::cout << "ParentId: " << channel->getParentId() << "\n";
+        std::cout << "Position: " << channel->getPosition() << "\n";
+        std::cout << "Timeout: " << channel->getTimeout() << "\n";
+        std::cout << "LastMessageId: " << channel->getLastMessageId() << "\n";
+        std::cout << "Name: " << channel->getName() << "\n";
+        std::cout << "Nsfw: " << channel->getNsfw() << "\n";
+    }
+    
+
+    if(channel->getType() == ChannelType::GUILD_VOICE){
+        auto voiceChannel = dynamic_cast<DiscordVoiceChannel*>(channel.get());
+        std::cout << "Bitrate: " << voiceChannel->getBitrate() << "\n";
+        std::cout << "UserLimit: " << voiceChannel->getUserLimit() << "\n";
+        std::cout << "Rtc Region: " << voiceChannel->getRtcRegion() << "\n";
+    }
+}
 
 int main(int argc, char** argv){
     SetConsoleOutputCP(65001);
@@ -48,8 +72,6 @@ int main(int argc, char** argv){
     std::cout << "User email: " << user.getEmail() << "\n";
     std::cout << "Verified: " << user.getVerified() << "\n";
 
-    std::cout << "\n\n====Json User Data====\n";
-    std::cout << bot.getJson().dump(4);
 
     std::cout << "\n\n====Guild Info====\n";
 
@@ -79,39 +101,11 @@ int main(int argc, char** argv){
         descriptionRole(role);
         std::cout << "\n";
     }
-
-    std::cout << "\n====Json Guild Data====\n";
-    std::cout << bot.getJson().dump(4);
-
-
-    std::cout << "\n\n====Channel Data====\n";
-    const auto channelId = strtoull(argv[1], nullptr, 0);
-    auto channel = bot.getDiscordChannel(channelId);
+    auto channels = bot.getDiscordChannels(bot.getDiscordGuilds()[0].getId());
+    std::cout << "====Channel Data====\n\n";
     
-    if(channel->getType() == ChannelType::DM){
-        auto dmChannel = dynamic_cast<DiscordDmChannel*>(channel.get());
-        std::cout << "Channel ID: " << dmChannel->getId() << "\n";
+    for(const auto& ch : channels){
+        descriptionChannel(std::move(ch));
+        std::cout << "\n";
     }
-
-    if(isGuild(channel->getType())){
-        std::cout << "GuildId: " << channel->getGuildId() << "\n";
-        std::cout << "ParentId: " << channel->getParentId() << "\n";
-        std::cout << "Position: " << channel->getPosition() << "\n";
-        std::cout << "Timeout: " << channel->getTimeout() << "\n";
-        std::cout << "LastMessageId: " << channel->getLastMessageId() << "\n";
-        std::cout << "Name: " << channel->getName() << "\n";
-        std::cout << "Nsfw: " << channel->getNsfw() << "\n";
-    }
-    
-
-    if(channel->getType() == ChannelType::GUILD_VOICE){
-        auto voiceChannel = dynamic_cast<DiscordVoiceChannel*>(channel.get());
-        std::cout << "Bitrate: " << voiceChannel->getBitrate() << "\n";
-        std::cout << "UserLimit: " << voiceChannel->getUserLimit() << "\n";
-        std::cout << "Rtc Region: " << voiceChannel->getRtcRegion() << "\n";
-    }
-
-    std::cout << "\n\n====Json Channel Data====\n";
-    std::cout << bot.getJson().dump(4);
-    
 }

@@ -62,6 +62,42 @@ DiscordUser DiscordBot::me(){
     return _json.get<DiscordUser>();
 }
 
+std::vector<DiscordGuild> DiscordBot::getDiscordGuilds(){
+    json j = connect("discord.com/api/v10/users/@me/guilds", params);
+    _json = std::move(j);
+    return _json.get<std::vector<DiscordGuild>>();
+}
+
+std::vector<std::unique_ptr<DiscordChannel>> DiscordBot::getDiscordChannels(uint64_t guildId){
+    json j = connect("discord.com/api/v10/guilds/" + std::to_string(guildId) + "/channels", params);
+    _json = std::move(j);
+    std::vector<std::unique_ptr<DiscordChannel>> channels;
+    for (const auto &ch : _json)
+    {
+        auto type = ch.at("type").get<ChannelType>();
+
+        if(type == ChannelType::GUILD_VOICE){
+            auto voiceChannel = std::make_unique<DiscordVoiceChannel>();
+            ch.get_to(*voiceChannel);
+            channels.push_back(std::move(voiceChannel));
+        }
+
+        else if(type == ChannelType::DM){
+            auto dmChannel = std::make_unique<DiscordDmChannel>();
+            ch.get_to(*dmChannel);
+            channels.push_back(std::move(dmChannel));
+        }
+
+        else {
+            auto channel = std::make_unique<DiscordChannel>();
+            ch.get_to(*channel);
+            channels.push_back(std::move(channel));
+        }
+    }
+    
+    return channels;
+}
+
 DiscordUser DiscordBot::getDiscordUser(snowflake id){
     json j = connect("discord.com/api/v10/users/" + std::to_string(id), params);
     _json = std::move(j);

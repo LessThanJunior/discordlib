@@ -53,7 +53,7 @@ class DiscordChannel{
     std::vector<PermissionOverwrite> permissionOverwrites;
     std::string name;
     std::string topic;
-    bool nsfw;
+    bool nsfw = 0;
     snowflake lastMessageId;
     uint16_t timeout;                       // amount of seconds a user has to wait before sending another message
     snowflake parentId;                     // for guild channels: id of the parent category for a channel (each parent category can contain up to 50 channels), for threads: id of the text channel this thread was created
@@ -92,7 +92,7 @@ class DiscordDmChannel : public DiscordChannel{
     std::vector<DiscordUser> recipients;
     snowflake ownerId;                      // id of the creator of the group DM or thread
     snowflake applicationId;                // application id of the group DM creator if it is bot-created
-    bool managed;                           // for group DM channels: whether the channel is managed by an application via the gdm.join OAuth2 scope
+    bool managed = 0;                       // for group DM channels: whether the channel is managed by an application via the gdm.join OAuth2 scope
     std::string icon;                       // icon hash of the group DM
 public:
     friend class ChannelJsonDeserializer;
