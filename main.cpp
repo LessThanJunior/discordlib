@@ -104,5 +104,16 @@ int main(int argc, char** argv){
         descriptionChannel(std::move(ch));
         std::cout << "\n";
     }
+    
+    std::cout << "====CACHED_DATA====\n\n";
+    for(int i = 0; i < 20; i++){
+        auto channels_test = bot.getDiscordChannels(799333274861174876);
+        std::cout << "====Channel Data====\n\n";
+        for(const auto& ch : channels_test){
+            descriptionChannel(std::move(ch));
+            std::cout << "\n";
+        }
+    }
+
     std::cout << 1 << "\n";
 }
