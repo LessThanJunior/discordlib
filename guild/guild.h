@@ -1,6 +1,6 @@
 #ifndef GUILD_H
 #define GUILD_H
-#include "../snowflake.h"
+#include "../snowflake/snowflake.h"
 #include <string>
 #include <optional>
 #include <vector>

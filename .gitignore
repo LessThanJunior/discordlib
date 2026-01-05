@@ -2,3 +2,4 @@
 .vscode/
 *.bat
 guild_info.txt
+build/

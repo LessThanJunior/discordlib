@@ -1,7 +1,7 @@
 #ifndef DISCORD_USER_H
 #define DISCORD_USER_H
 #include <string>
-#include "../snowflake.h"
+#include "../snowflake/snowflake.h"
 
 enum class NitroType{
     NONE,

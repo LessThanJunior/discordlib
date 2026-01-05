@@ -1,7 +1,7 @@
 #ifndef GUILD_CHANNEL_H
 #define GUILD_CHANNEL_H
 
-#include "../../snowflake.h"
+#include "../../snowflake/snowflake.h"
 #include "channel_permissions.h"
 #include <vector>
 #include "../../user/user.h"

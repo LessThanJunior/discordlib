@@ -2,9 +2,9 @@
 #define BOT_H
 #include <map>
 #include <string>
-#include "guild/guild.h"
+#include "../guild/guild.h"
 #include <nlohmann/json.hpp>
-#include "guild/channel/channel.h"
+#include "../guild/channel/channel.h"
 
 using json = nlohmann::json;
 

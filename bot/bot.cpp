@@ -1,11 +1,11 @@
 #include "bot.h"
-#include "https/https.h"
+#include "../https/https.h"
 #include <nlohmann/json.hpp>
 #include <iostream>
-#include "snowflake.h"
-#include "guild/guild_json.h"
-#include "guild/channel/channel_json.h"
-#include "user/user_json.h"
+#include "../snowflake/snowflake.h"
+#include "../guild/guild_json.h"
+#include "../guild/channel/channel_json.h"
+#include "../user/user_json.h"
 
 DiscordBot::DiscordBot(std::map<std::string, std::string> params)
 {

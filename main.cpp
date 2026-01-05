@@ -1,10 +1,7 @@
-#include "snowflake.h"
 #include <iostream>
-#include "guild/guild.h"
-#include <nlohmann/json.hpp>
-#include "bot.h"
-#include "https/https.h"
+#include "bot/bot.h"
 #include "windows.h"
+
 using json = nlohmann::json;
 
 const std::string getToken(){
@@ -103,9 +100,9 @@ int main(int argc, char** argv){
     }
     auto channels = bot.getDiscordChannels(bot.getDiscordGuilds()[0].getId());
     std::cout << "====Channel Data====\n\n";
-    
     for(const auto& ch : channels){
         descriptionChannel(std::move(ch));
         std::cout << "\n";
     }
+    std::cout << 1 << "\n";
 }
