@@ -15,7 +15,8 @@ DiscordBot::DiscordBot(std::map<std::string, std::string> params)
 DiscordGuild DiscordBot::getDiscordGuild(snowflake id)
 {
     std::string test = "discord.com/api/v10/guilds/" + std::to_string((uint64_t)id);
-    json j = connect(test, this->params);
+    Https https;
+    json j = https.connect(test, this->params);
     _json = std::move(j);
     return _json.get<DiscordGuild>();; 
 }
@@ -27,8 +28,9 @@ DiscordGuild DiscordBot::getDiscordGuild(uint64_t id)
 
 std::unique_ptr<DiscordChannel> DiscordBot::getDiscordChannel(snowflake id) 
 {
+    Https https;
     std::string test = "discord.com/api/v10/channels/" + std::to_string((uint64_t)id);
-    json j = connect(test, this->params);
+    json j = https.connect(test, this->params);
     _json = std::move(j);
     auto type = _json.at("type").get<ChannelType>();
 
@@ -56,20 +58,23 @@ std::unique_ptr<DiscordChannel> DiscordBot::getDiscordChannel(uint64_t id)
 }
 
 DiscordUser DiscordBot::me(){
-    json j = connect("discord.com/api/v10/users/@me", params);
+    Https https;
+    json j = https.connect("discord.com/api/v10/users/@me", params);
     _json = std::move(j);
 
     return _json.get<DiscordUser>();
 }
 
 std::vector<DiscordGuild> DiscordBot::getDiscordGuilds(){
-    json j = connect("discord.com/api/v10/users/@me/guilds", params);
+    Https https;
+    json j = https.connect("discord.com/api/v10/users/@me/guilds", params);
     _json = std::move(j);
     return _json.get<std::vector<DiscordGuild>>();
 }
 
 std::vector<std::unique_ptr<DiscordChannel>> DiscordBot::getDiscordChannels(uint64_t guildId){
-    json j = connect("discord.com/api/v10/guilds/" + std::to_string(guildId) + "/channels", params);
+    Https https;
+    json j = https.connect("discord.com/api/v10/guilds/" + std::to_string(guildId) + "/channels", params);
     _json = std::move(j);
     std::vector<std::unique_ptr<DiscordChannel>> channels;
     for (const auto &ch : _json)
@@ -99,7 +104,8 @@ std::vector<std::unique_ptr<DiscordChannel>> DiscordBot::getDiscordChannels(uint
 }
 
 DiscordUser DiscordBot::getDiscordUser(snowflake id){
-    json j = connect("discord.com/api/v10/users/" + std::to_string(id), params);
+    Https https;
+    json j = https.connect("discord.com/api/v10/users/" + std::to_string(id), params);
     _json = std::move(j);
 
     return _json.get<DiscordUser>();

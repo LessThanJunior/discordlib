@@ -20,7 +20,7 @@
 - [x] Get all Channels
 - [ ] Get Guild Members
 - [ ] Get Guild Member by id
-- [ ] Add HTTPS rate limiting if needed 
+- [x] Add HTTPS rate limiting if needed 
 - [ ] Modify objects
   - [ ] Guild
   - [ ] Channel
